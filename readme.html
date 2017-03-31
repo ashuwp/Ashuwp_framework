@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Ashu_framework | ashuwp.com</title>
+<style>
+html {
+  background:#eee;
+  margin:0 20px;
+}
+body {
+  background:#fff;
+  color:#555;
+  font-family:Arial,Microsoft Yahei;
+  margin:140px auto 25px;
+  padding:20px;
+  max-width:940px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.13);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.13);
+}
+a {
+  color:#56ccc8;
+  text-decoration:none;
+}
+a:hover {
+  color:#98DFDC;
+  text-decoration:underline;
+}
+h1 {
+  border-bottom:1px solid #dedede;
+  clear:both;
+  color:#666;
+  font-size: 24px;
+  margin: 30px 0;
+  padding: 0;
+  padding-bottom: 7px;
+  font-weight: normal;
+}
+p, li {
+  padding-bottom: 2px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+ul, ol {
+  padding: 5px 5px 5px 22px;
+}
+a img {
+  border:0
+}
+pre {
+  margin-bottom: 22px;
+  font-size: 12px;
+  font-weight: inherit;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap !important;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  background: #f3f3f7;
+  border: 1px solid #dedee3;
+  padding: 11px;
+  line-height: 1.3em;
+  overflow: auto;
+}
+#logo {
+  margin: -90px auto 25px;
+  border-bottom: none;
+  text-align: center;
+  font-weight: bold;
+  color: #7a7a7a;
+  font-size: 50px;
+}
+#logo a {
+  color: #7a7a7a;
+  text-decoration:none;
+}
+.align-cenetr {
+  text-align:center;
+}
+</style>
+</head>
+<body>
+<h1 id="logo">
+ <a href="http://www.ashuwp.com">http://www.ashuwp.com</a>
+</h1>
+<h2 class="align-cenetr">版本5.0</h2>
+<p class="align-cenetr">阿树工作室出品-wordpress主题后台框架</p>
+<h1>简介</h1>
+<p>本框架由阿树工作室发布，众网友可自由使用，使用本框架需要一定的代码基础，所以使用之前请先确保已经具有适量的php语法知识以及对wordpress有一定的了解。<br />
+本框架的用途是：
+<ol>
+  <li>给你的wordpress文章发布页面添加自定义面板和自定义字段</li>
+  <li>给你的wordperss网站后台添加设置页面</li>
+  <li>给你的wordpress分类页面以及分类编辑页面添加自定义字段</li>
+</ol>
+</p>
+<h1>使用方法</h1>
+<ul>
+  <li>1. 将ashuwp_framework整个文件夹复制到主题中。</li>
+  <li>2. 将add-functions.php文件的两句加载框架范例代码复制到主题的functions.php文件中。</li>
+  <li>3. 根据实际需求编辑配置数据。</li>
+  <li>4. 完成了，去后台看看。</li>
+</ul>
+
+<h1>更新记录</h1>
+<p>1.1版本 2014.5.28</p>
+<ul>
+<li>修复三个类文件中，关于numbers_array项，空值时报错问题。在三个类文件中numbers_array项中，对值做了空值的判断</li>
+</ul>
+<p>1.2版本 2014.7.17</p>
+<ul>
+<li>修改metaboxclass.php,对wp_enqueue_media()函数的加载做了判断，避免在自定义文章类型时，不加载media相关js和css，以及重复加载造成特色图像等无法使用的问题。</li>
+</ul>
+<p>1.3版本 2014.10.23</p>
+<ul>
+<li>更改了配置文件的示例代码，1.2版本generaloption和childoption两个设置页面的配置变量名重复，导致很多直接使用示例代码测试的用户测试失败。</li>
+</ul>
+<p>1.4版本 2015.7.19</p>
+<ul>
+<li>去掉了压缩包内的jquery文件</li>
+<li>给字段的textarea加入了size控制</li>
+<li>文件上传支持图片以外的文件，且加入了预览图标</li>
+</ul>
+<p>2.0版本 2015.7.19</p>
+<p>由于较之前版本差别较大，所以版本号从1.4调整到2.0</p>
+<ul>
+<li>设置页面允许添加多个顶级页面</li>
+<li>加入了导入导出功能</li>
+</ul>
+<p>2.1版本 2015.7.29</p>
+<ul>
+<li>调整了js，修复文件上传项不上传文件而又点击了输入框时出现文件图标的问题。</li>
+</ul>
+<p>2.2版本 2015.8.1</p>
+<ul>
+<li>调整了metaboxclass.php,更改了里面的js加载方式，修复文件上传和特色图像同时存在发生冲突的问题。</li>
+</ul>
+<p>3.0版本 2015.8.10</p>
+<ul>
+<li>增加了相册功能(一个页面支持多个相册，支持拖拽排序)，同时支持文章自定义字段、设置选项、分类字段</li>
+<li>增加了选项卡功能(一个面板内的字段可以以选项卡的形式显示)，支持文章自定义字段、设置选项。分类字段不支持</li>
+</ul>
+<p>3.1版本 2015.9.30</p>
+<ul>
+<li>解决了与一些插件(如七牛存储)的冲突</li>
+</ul>
+<p>3.2版本 2015.10.17</p>
+<ul>
+<li>修改了simple-term-meta代码的顺序，修复了3.1版本的报错问题</li>
+<li>增加了type=password的输入框</li>
+</ul>
+<p>4.0版本 2016.02.15</p>
+<ul>
+<li>注意：4.0版本类名、文件名、函数等经过大幅修改，与前面版本并不兼容</li>
+<li>1. 删除了simple-term-meta.php文件</li>
+<li>2. 增加ashuwp_framework_core.php文件，作为整个框架的核心类</li>
+<li>3. 文件名和类名统一</li>
+<li>4. 加强了容错能力</li>
+<li>5. 支持php7环境</li>
+</ul>
+<p>4.1版本 2016.03.08</p>
+<ul>
+<li>1. 修正了设置数据中含有单引号双引号会被添加反斜杠的问题。</li>
+<li>2. 设置数据支持html代码。注意：文章和分类字段可输入html代码，输出时请用htmlspecialchars_decode处理即可。</li>
+</ul>
+<p>4.2版本 2016.03.14</p>
+<ul>
+<li>1. 修正了在新版wordpress中，同时开启特色图像和图片上传导致特色图像无法使用的问题。</li>
+<li>2. 修正了设置选项中的某些情况报错问题。</li>
+</ul>
+<p>4.3版本 2016.04.02</p>
+<ul>
+<li>1. 修正了分类字段删除再保存数据时无法保存的问题。</li>
+<li>2. 更改了分类字段和文章字段的数据保存代码，在字段值为空时，删除数据库中的数据。</li>
+</ul>
+<p>4.4版本 2016.04.26</p>
+<ul>
+<li>1. 增加了单选框(radio)对分类、页面、侧边栏、菜单的支持。</li>
+<li>2. 增加了复选框(checkbox)对分类、页面、侧边栏、菜单的支持。</li>
+<li>3. 将单选框和复选框中选项的配置参数有原来的buttons更改为统一的subtype。</li>
+<li>4. 下拉框(select)对分类支持按层级显示，对页面支持按层级显示。</li>
+<li>5. 可给后台设置选项的html代码中增加class属性，通过配置数组参数中增加class项</li>
+<li>6. 更新了框架的css文件</li>
+<li>7. 更新了框架的js文件，删掉了原版本中用于支持选项卡的js代码，改由wordpress自带的jquery-ui-tabs插件提供支持。</li>
+</ul>
+<p>4.5版本 2016.07.15</p>
+<ul>
+<li>1. 优化了部分函数</li>
+<li>2. 增加了单选框(radio)对自定义文章类型的支持(包括post、page)。</li>
+<li>3. 增加了复选框(checkbox)对自定义文章类型的支持(包括post、page)。</li>
+<li>4. 增加了下拉框(select)对自定义文章类型的支持(包括post、page)。</li>
+<li>5. 设置页面增加了Clear按钮，可清除设置选项。</li>
+<li>6. 更新了css文件。</li>
+</ul>
+<p>5.0版本 2017.03.31</p>
+<ul>
+<li>注意：4.x版本请勿用5.0版本覆盖，5.0版本更改了加载框架方式，和获取设置数据的方式。</li>
+<li>1. 更改了加载框架的方式。</li>
+<li>2. 重要更新：取消4.x及以前版本用全局变量“global $ashuwp_option”来获取设置数据的方式，仅采用get_option函数获取设置数据。</li>
+<li>3. 重要更新：增加了可以将多个输入框组合成一组数据的配置方式(type设置为group),保存的数据为数组。</li>
+<li>4. 重要更新：增加“输入框可点击增加”的功能(multiple设置为true)。</li>
+</ul>
+<h1>使用方法</h1>
+<p><a href="http://www.ashuwp.com/framework/down">查阅Ashuwp_framework帮助文档</a></p>
+
+<h1>最后</h1>
+<p>
+<ul>
+  <li>对框架的使用有不了解的地方，请参考config-example.php里面的示例代码，或者直接联系我们。</li>
+  <li>对本框架有任何建议、想法、评论或者发现了bug。请联系我们</li>
+  <li>如果你对本框架有更好的改进意见，请一定联系我们，帮助我们开发更完善更严谨的框架代码。谢谢。</li>
+  <li>邮箱：admin@ashuwp.com</li>
+</ul>
+</p>
+</body>
+</html>
