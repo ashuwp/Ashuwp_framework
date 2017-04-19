@@ -135,12 +135,12 @@ $option_page = new ashuwp_options_feild($ashu_options, $page_info);
 2. 为了与其它可能的插件区分，设置数据在保存的时候加了前缀。
 3. 使用get_option函数可以获取数据。
 范例：
-```
+```php
 //设置页面配置'optionname'=>'general'
 $general_option = get_option( 'ashuwp_general' );
 
 // $general_option是多维数组
-// 使用var_dump打印数据结构
+// 若不确定结构，可使用var_dump打印数据结构
 var_dump( $general_option );
 
 ```
