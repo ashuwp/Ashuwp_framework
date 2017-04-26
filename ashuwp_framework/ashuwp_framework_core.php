@@ -1023,7 +1023,11 @@ class ashuwp_framework_core {
               }
               
               if(!empty( $values['std'][$sub_type['id']] )){
-                $sub_values['std'] = $values['std'][$sub_type['id']];
+                if($sub_type['type']=='gallery'){
+                  $sub_values['std'] = explode( ',', $sub_std[$sub_type['id']] );
+                }else{
+                  $sub_values['std'] = $sub_std[$sub_type['id']];
+                }
               }else{
                 $sub_values['std'] = '';
               }
