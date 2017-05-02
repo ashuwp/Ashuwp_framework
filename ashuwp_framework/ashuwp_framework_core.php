@@ -682,7 +682,7 @@ class ashuwp_framework_core {
     if( !empty($values['multiple']) && $values['multiple'] == true ){
       $format = '<div class="multiple_item clearfix"><div id="%s" class="ashuwp_file_preview">%s</div><div class="ashuwp_upload_input"><input type="text" id="%s" name="%s" value="%s" class="ashuwp_field_upload" /><a id="%s" class="ashu_upload_button button" href="#">%s</a></div>%s<a href="#" class="delete_item">Delete</a></div>';
       
-      $this->enqueue_html['ashuwp_framework_html_'.$values['id']] = sprintf( $format, $values['id'].'_preview_{{i}}', $values['id'].'_upload_{{i}}', $values['id'].'[{{i}}]', '', $values['id'].'_{{i}}',  $button_text, $values['desc'] );
+      $this->enqueue_html['ashuwp_framework_html_'.$values['id']] = sprintf( $format, $values['id'].'_preview_{{i}}','', $values['id'].'_upload_{{i}}', $values['id'].'[{{i}}]', '', $values['id'].'_{{i}}',  $button_text, $values['desc'] );
       
     }else{
       $format = '<div id="%s" class="ashuwp_file_preview">%s</div><div class="ashuwp_upload_input"><input type="text" id="%s" name="%s" value="%s" class="ashuwp_field_upload" /><a id="%s" class="ashu_upload_button button" href="#">%s</a></div>%s';
@@ -752,20 +752,29 @@ class ashuwp_framework_core {
       if( !empty($values['multiple']) && $values['multiple'] == true ){
         
         if( empty( $values['std'] ) || !is_array( $values['std'] ) ){
+          //$values['std'] = explode( ',', $values['std'] );
           $values['std'] = array();
         }
         $i=0;
         echo '<div class="multiple_wrap clearfix">';
         
-        $html_li = '';
+        
         
         foreach($values['std'] as $key=>$value){
           $i++;
-          if( !empty($value) && is_array($value) ){
-            $image_ids = '';
-            $image_ids = implode( ',', $values['std'] );
+          $html_li = '';
+          if(!is_array($value)){
+            $value_array = explode( ',', $value );
+          }else{
+            $value_array = $value;
+          }
             
-            foreach($value as $attachment_id){
+          if( !empty($value_array) && is_array($value_array) ){
+            $image_ids = '';
+           
+            $image_ids = implode( ',', $value_array);
+            
+            foreach($value_array as $attachment_id){
               $attachment = array();
               $attachment = wp_get_attachment_image_src($attachment_id, 'thumbnail');
               $file_type = substr($attachment[0], strrpos($attachment[0] , '.') + 1);
@@ -780,7 +789,7 @@ class ashuwp_framework_core {
             }
           }
           
-          echo sprintf( $format, $values['desc'], $html_li, $values['id'].'_input_{{i}}', $values['id'].'[{{i}}]', '', $button_text );
+          echo sprintf( $format, $values['desc'], $html_li, $values['id'].'_input_{{i}}', $values['id'].'[{{i}}]', $image_ids, $button_text );
           
         }
         
@@ -1031,7 +1040,7 @@ class ashuwp_framework_core {
         }
         echo '</div>';
         
-        echo '</div>';
+        echo '<a href="#" class="delete_item">Delete</a></div>';
       }
       
       echo '<a href="#" class="add_item button-secondary" data_name="ashuwp_framework_html_'.$values['id'].'">Add</a></div>';
