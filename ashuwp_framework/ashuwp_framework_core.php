@@ -3,7 +3,7 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.0
+* Version: 5.1
 **/
 
 class ashuwp_framework_core {
@@ -41,6 +41,32 @@ class ashuwp_framework_core {
     }
     
     echo $html_output;
+  }
+  
+  public function get_file_ico($src){
+    $file_type = substr($src, strrpos($src , '.') + 1);
+    if( in_array($file_type,array('png','jpg','gif','bmp','svg')) ){
+      $file_ico = $src;
+    }elseif( in_array($file_type,array('zip','rar','7z','gz','tar','bz','bz2')) ){
+      $file_ico = includes_url().$this->file_png['archive'];
+    }elseif( in_array($file_type,array('mp3','wma','wav','mod','ogg','au')) ){
+      $file_ico = includes_url().$this->file_png['audio'];
+    }elseif( in_array($file_type,array('avi','mov','wmv','mp4','flv','mkv')) ){
+      $file_ico = includes_url().$this->file_png['video'];
+    }elseif( in_array($file_type,array('swf')) ){
+      $file_ico = includes_url().$this->file_png['interactive'];
+    }elseif( in_array($file_type,array('php','js','css','json','html','xml')) ){
+      $file_ico = includes_url().$this->file_png['code'];
+    }elseif( in_array($file_type,array('doc','docx','pdf','wps')) ){
+      $file_ico = includes_url().$this->file_png['_document'];
+    }elseif( in_array($file_type,array('xls','xlsx','csv','et','ett')) ){
+      $file_ico = includes_url().$this->file_png['spreadsheet'];
+    }elseif( in_array($file_type,array('txt','rtf')) ){
+      $file_ico = includes_url().$this->file_png['_text'];
+    }else{
+      $file_ico = includes_url().$this->file_png['_default'];
+    }
+    return $file_ico;
   }
   
   public function ashuwp_get_posts_by_level($args, $space = ''){
@@ -649,33 +675,12 @@ class ashuwp_framework_core {
 
     $file_view = '';
     
-    if($values['std'] != ''){
-      $file_type = substr($values['std'], strrpos($values['std'] , '.') + 1);
-      if( in_array($file_type,array('png','jpg','gif','bmp','svg')) ){
-        $file_view = '<img src="'.$values['std'].'" />';
-      }elseif( in_array($file_type,array('zip','rar','7z','gz','tar','bz','bz2')) ){
-        $file_view = '<img src="'.includes_url().$this->file_png['archive'].'" />';
-      }elseif( in_array($file_type,array('mp3','wma','wav','mod','ogg','au')) ){
-        $file_view = '<img src="'.includes_url().$this->file_png['audio'].'" />';
-      }elseif( in_array($file_type,array('avi','mov','wmv','mp4','flv','mkv')) ){
-        $file_view = '<img src="'.includes_url().$this->file_png['video'].'" />';
-      }elseif( in_array($file_type,array('swf')) ){
-        $file_view = '<img src="'.includes_url().$this->file_png['interactive'].'" />';
-      }elseif( in_array($file_type,array('php','js','css','json','html','xml')) ){
-        $file_view = '<img src="'.includes_url().$this->file_png['code'].'" />';
-      }elseif( in_array($file_type,array('doc','docx','pdf','wps')) ){
-        $file_view = '<img src="'.includes_url().$this->file_png['_document'].'" />';
-      }elseif( in_array($file_type,array('xls','xlsx','csv','et','ett')) ){
-        $file_view = '<img src="'.includes_url().$this->file_png['spreadsheet'].'" />';
-      }elseif( in_array($file_type,array('txt','rtf')) ){
-        $file_view = '<img src="'.includes_url().$this->file_png['_text'].'" />';
-      }else{
-        $file_view = '<img src="'.includes_url().$this->file_png['_default'].'" />';
-      }
+    if( $values['std'] != '' && !is_array($values['std']) ){
+      $file_view = '<img src="'.$this->get_file_ico($values['std']).'" />';
     }
     
     if( !empty($values['multiple']) && $values['multiple'] == true ){
-      $format = '<div class="multiple_item clearfix"><div id="%s" class="ashuwp_file_preview"></div><div class="ashuwp_upload_input"><input type="text" id="%s" name="%s" value="%s" class="ashuwp_field_upload" /><a id="%s" class="ashu_upload_button button" href="#">%s</a></div>%s<a href="#" class="delete_item">Delete</a></div>';
+      $format = '<div class="multiple_item clearfix"><div id="%s" class="ashuwp_file_preview">%s</div><div class="ashuwp_upload_input"><input type="text" id="%s" name="%s" value="%s" class="ashuwp_field_upload" /><a id="%s" class="ashu_upload_button button" href="#">%s</a></div>%s<a href="#" class="delete_item">Delete</a></div>';
       
       $this->enqueue_html['ashuwp_framework_html_'.$values['id']] = sprintf( $format, $values['id'].'_preview_{{i}}', $values['id'].'_upload_{{i}}', $values['id'].'[{{i}}]', '', $values['id'].'_{{i}}',  $button_text, $values['desc'] );
       
@@ -692,7 +697,13 @@ class ashuwp_framework_core {
         echo '<div class="multiple_wrap clearfix">';
         foreach($values['std'] as $key=>$val){
           $i++;
-          echo sprintf( $format, $values['id'].'_preview_'.$i, $values['id'].'_upload_'.$i, $values['id'].'['.$i.']', '', $values['id'].'_'.$i,  $button_text, $values['desc']  );
+          $file_view = '';
+          if( $val != '' ){
+            $file_view = '<img src="'.$this->get_file_ico($val).'" />';
+            
+          }
+          
+          echo sprintf( $format, $values['id'].'_preview_'.$i, $file_view, $values['id'].'_upload_'.$i, $values['id'].'['.$i.']', $val, $values['id'].'_'.$i,  $button_text, $values['desc']  );
         }
         echo '<a href="#" class="add_item button-secondary" data_name="ashuwp_framework_html_'.$values['id'].'">Add</a></div>';
       }else{
@@ -755,7 +766,17 @@ class ashuwp_framework_core {
             $image_ids = implode( ',', $values['std'] );
             
             foreach($value as $attachment_id){
-              $html_li .= '<div class="image" data-attachment_id="' . $attachment_id . '">' . wp_get_attachment_image( $attachment_id, 'thumbnail' ) . '<div class="actions"><a href="#" class="delete" title="Delete image">Delete</a></div></div>';
+              $attachment = array();
+              $attachment = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+              $file_type = substr($attachment[0], strrpos($attachment[0] , '.') + 1);
+              
+              if( in_array($file_type,array('png','jpg','gif','bmp','svg')) ){
+                $ico_src = $attachment[0];
+              }else{
+                $ico_src = wp_mime_type_icon($attachment_id);
+              }
+    
+              $html_li .= '<div class="image" data-attachment_id="' . $attachment_id . '"><img src="' . $ico_src . '" /><div class="actions"><a href="#" class="delete" title="Delete image">Delete</a></div></div>';
             }
           }
           
@@ -772,12 +793,21 @@ class ashuwp_framework_core {
          
         if ( !empty($values['std']) && is_array($values['std']) ){
           foreach ( $values['std'] as $attachment_id ) {
-            echo '<div class="image" data-attachment_id="' . $attachment_id . '">' . wp_get_attachment_image( $attachment_id, 'thumbnail' ) . '<div class="actions"><a href="#" class="delete" title="Delete image">Delete</a></div></div>';
+            $attachment = array();
+            $attachment = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+            $file_type = substr($attachment[0], strrpos($attachment[0] , '.') + 1);
+              
+            if( in_array($file_type,array('png','jpg','gif','bmp','svg')) ){
+              $ico_src = $attachment[0];
+            }else{
+              $ico_src = wp_mime_type_icon($attachment_id);
+            }
+            echo '<div class="image" data-attachment_id="' . $attachment_id . '"><img src="' . $ico_src . '" /><div class="actions"><a href="#" class="delete" title="Delete image">Delete</a></div></div>';
           }
         }
         
         echo '</div>';
-         
+        
         echo '<input type="hidden" id="'.$values['id'].'_input" class="ashuwp_gallery_input" name="'.$values['id'].'" value="'.$image_ids.'" />';
          
         echo '<a href="#" class="add_gallery button">'.$button_text.'</a>';
@@ -984,11 +1014,17 @@ class ashuwp_framework_core {
             }
               
             if(!empty( $sub_std[$sub_type['id']] )){
-              $sub_values['std'] = $sub_std[$sub_type['id']];
+              if($sub_type['type']=='gallery'){
+                $sub_values['std'] = explode( ',', $sub_std[$sub_type['id']] );
+              }else{
+                $sub_values['std'] = $sub_std[$sub_type['id']];
+              }
+              
             }else{
               $sub_values['std'] = '';
             }
-              if($sub_type['type']!='group'){
+            
+            if($sub_type['type']!='group'){
                 $this->{$sub_type['type']}($sub_values);
               }
             }
@@ -1023,11 +1059,7 @@ class ashuwp_framework_core {
               }
               
               if(!empty( $values['std'][$sub_type['id']] )){
-                if($sub_type['type']=='gallery'){
-                  $sub_values['std'] = explode( ',', $sub_std[$sub_type['id']] );
-                }else{
-                  $sub_values['std'] = $sub_std[$sub_type['id']];
-                }
+                $sub_values['std'] = $values['std'][$sub_type['id']];
               }else{
                 $sub_values['std'] = '';
               }
