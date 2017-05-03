@@ -3,7 +3,7 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.1
+* Version: 5.2
 **/
 
 class ashuwp_framework_core {
@@ -1031,6 +1031,12 @@ class ashuwp_framework_core {
               
             }else{
               $sub_values['std'] = '';
+            }
+            
+            if(!empty( $sub_type['button_text'] )){
+              $sub_values['button_text'] = $sub_type['button_text'];
+            }else{
+              $sub_values['button_text'] = '';
             }
             
             if($sub_type['type']!='group'){

@@ -3,8 +3,8 @@
 
 Ashuwp_framework是由阿树工作室发布的一个wordpress后台框架。
 
-最新版本 5.1
-更新日期 2017.05.02
+最新版本 5.2
+更新日期 2017.05.03
 
 使用本框架的要求：你需要具备基础的php语法知识，以及对wordpress主题有基本的了解。
 
@@ -31,7 +31,7 @@ Ashuwp_framework是由阿树工作室发布的一个wordpress后台框架。
 * [查阅Ashuwp_framework帮助文档](http://www.ashuwp.com/framework/down)
 * 邮箱：admin@ashuwp.com
 
-##Introductions
+## Introductions
 
 Ashuwp_framework is a framework for wordpress theme, Help developers to add options page/post metabox/term metabox for wordpress theme quickly and easily.
 
