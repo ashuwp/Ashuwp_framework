@@ -3,7 +3,7 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.3
+* Version: 5.4
 **/
 
 class ashuwp_framework_core {
@@ -1058,7 +1058,13 @@ class ashuwp_framework_core {
           foreach($values['subtype'] as $sub_type){
             $sub_values = array();
             if(!empty($sub_type['id']) && method_exists($this, $sub_type['type'])){
-              $sub_values['id'] = $values['id'].'['.$sub_type['id'].']';
+              if( $sub_type['type']=='tinymce'){
+                $sub_values['id'] = $values['id'].'_'.$sub_type['id'];
+                $sub_values['textarea_name'] = $values['id'].'['.$sub_type['id'].']';
+              }else{
+                $sub_values['id'] = $values['id'].'['.$sub_type['id'].']';
+              }
+              
               $sub_values['type'] = $sub_type['type'];
               $sub_values['multiple'] = false;
               if(!empty( $sub_type['name'] )){
