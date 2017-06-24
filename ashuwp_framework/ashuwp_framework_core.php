@@ -854,6 +854,10 @@ class ashuwp_framework_core {
         else
           $settings['media_buttons'] = 1;
         
+        if( !empty($values['textarea_name']) ){
+          $settings['textarea_name'] = $values['textarea_name'];
+        }
+        
         wp_editor( $values['std'], $values['id'],$settings );
     
     $this->after_tags();
