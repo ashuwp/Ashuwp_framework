@@ -3,7 +3,7 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.4
+* Version: 5.5
 **/
 
 class ashuwp_framework_core {
@@ -612,22 +612,19 @@ class ashuwp_framework_core {
           
           echo '<select id="'. $values['id'].'_'.$i .'" name="'. $values['id'].'['.$i .']' .'" class="ashuwp_field_select">';
           
-          echo '<option value="">'.$select .'</option>';
+          echo '<option value="">Select...</option>';
           
           foreach(  $entries as $id => $title ) {
-            $checked = '';
+            $selected = '';
             if( $val == $id ) {
-              $checked = 'checked = "checked"';
+              $selected = "selected='selected'";
             }
             
-            echo sprintf( $format, $id, $checked, $title );
-            
-            echo '<a href="#" class="delete_item">Delete</a>';
-            
+            echo sprintf( $format, $id, $selected, $title );
           }
           
           echo '</select>';
-          echo $values['desc'].'</div>';
+          echo $values['desc'].'<a href="#" class="delete_item">Delete</a></div>';
 
         }
         
