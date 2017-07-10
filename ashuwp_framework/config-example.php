@@ -2,7 +2,7 @@
 /**
 *Author: Ashuwp
 *Author url: http://www.ashuwp.com
-*Version: 5.0
+*Version: 5.6
 **/
 
 /**
@@ -395,6 +395,15 @@ $ashu_options[] = array(
     'female'    => 'Female',
     'thirdness' => 'Third gender'
   ),
+  'type'    => 'select'
+);
+
+$ashu_options[] = array(
+  'name'    => 'Select User',
+  'id'      => 'select_user',
+  'desc'    => 'The options are users.',
+  'std'     => '',
+  'subtype' => 'user',
   'type'    => 'select'
 );
 

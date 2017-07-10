@@ -3,7 +3,7 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.5
+* Version: 5.6
 **/
 
 class ashuwp_framework_core {
@@ -142,6 +142,11 @@ class ashuwp_framework_core {
         'parent' => 0
       );
       $entries = $this->ashuwp_get_terms_by_level($t_args,'');
+    }elseif($values['subtype'] == 'user'){
+      $all_users = get_users();
+      foreach($all_users as $user){
+        $entries[$user->ID] = $user->user_login;
+      }
     }else{
       if(is_array($values['subtype'])){
         $entries = $values['subtype'];
