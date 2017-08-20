@@ -280,7 +280,7 @@ $ashu_feild[] = array(
   'desc'      => 'description or notice.Default content:Default content',
   'std'       => 'Default content',
   'edit_only' => false,
-  "type"      => "text"
+  'type"      => "text'
 );
 
 $ashuwp_termmeta_feild = new ashuwp_termmeta_feild($ashu_feild, $taxonomy_cof);

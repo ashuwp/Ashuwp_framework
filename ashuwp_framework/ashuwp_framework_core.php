@@ -3,7 +3,7 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.6
+* Version: 5.7
 **/
 
 class ashuwp_framework_core {
@@ -588,7 +588,7 @@ class ashuwp_framework_core {
       foreach(  $entries as $id => $title ) {
         $checked = '';
         if( $values['std'] == $id ) {
-          $checked = 'checked = "checked"';
+          $checked = 'selected="selected"';
         }
           
         $html_format .= sprintf( $format, $id, $checked, $title );
@@ -943,17 +943,30 @@ class ashuwp_framework_core {
     
         }elseif( $sub_type['type'] == 'checkbox' ){
           
-          $entries = $this->select_entries($values);
+          $entries = $this->select_entries($sub_type);
           $format_checkbox = '<label for="%s"><input type="checkbox" id="%s" name="%s" value="%s" class="ashuwp_field_checkbox" %s />%s</label>';
           
           foreach(  $entries as $id => $title ) {
             $checked ="";
-            if( in_array($id,$sub_type['std']) ) {
-              $checked = 'checked = "checked"';
-            }
             
-            $html_format .= sprintf( $format_checkbox, $values['id'].'[{{i}}]['.$sub_type['id'].']_'.$id, $values['id'].'[{{i}}]['.$sub_type['id'].']_'.$id, $values['id'].'[{{i}}]['.$sub_type['id'].']', $id, $checked, $title );
+            $html_format .= sprintf( $format_checkbox, $values['id'].'[{{i}}]['.$sub_type['id'].']_'.$id, $values['id'].'[{{i}}]['.$sub_type['id'].']_'.$id, $values['id'].'[{{i}}]['.$sub_type['id'].'][]', $id, $checked, $title );
           }
+          
+          $html_format .= $sub_type['desc'];
+          
+        }elseif( $sub_type['type'] == 'select' ){
+          
+          $entries = $this->select_entries($sub_type);
+          
+          $format_select = '<option value="%s" >%s</option>';
+          
+          $html_format .= '<select id="'. $values['id'].'[{{i}}]['.$sub_type['id'].']' .'" name="'. $values['id'].'[{{i}}]['.$sub_type['id'].']' .'" class="ashuwp_field_select"><option value="">Select...</option>';
+          
+          foreach(  $entries as $id => $title ) {
+            $html_format .= sprintf( $format_select, $id, $title );
+          }
+          
+          $html_format .= '</select>';
           
           $html_format .= $sub_type['desc'];
           
@@ -1021,7 +1034,13 @@ class ashuwp_framework_core {
             }else{
               $sub_values['name'] = '';
             }
-              
+            
+            if(!empty( $sub_type['subtype'] )){
+              $sub_values['subtype'] = $sub_type['subtype'];
+            }else{
+              $sub_values['subtype'] = '';
+            }
+            
             if(!empty( $sub_type['desc'] )){
               $sub_values['desc'] = $sub_type['desc'];
             }else{
