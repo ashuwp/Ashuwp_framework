@@ -3,7 +3,7 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.7.1
+* Version: 5.8
 **/
 
 class ashuwp_framework_core {

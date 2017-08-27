@@ -2,7 +2,7 @@
 /**
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.0
+* Version: 5.8
 **/
 
 class ashuwp_postmeta_feild extends ashuwp_framework_core {

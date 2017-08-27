@@ -3,7 +3,7 @@
 
 Ashuwp_framework是由阿树工作室发布的一个wordpress后台框架。
 
-最新版本 5.7.1
+最新版本 5.8
 更新日期 2017.08.27
 系统要求 php5.3以上 wordpress4.5以上
 

@@ -2,7 +2,7 @@
 /**
 *Author: Ashuwp
 *Author url: http://www.ashuwp.com
-*Version: 5.6
+*Version: 5.8
 **/
 
 /**
@@ -280,7 +280,7 @@ $ashu_feild[] = array(
   'desc'      => 'description or notice.Default content:Default content',
   'std'       => 'Default content',
   'edit_only' => false,
-  'type"      => "text'
+  'type'      => 'text'
 );
 
 $ashuwp_termmeta_feild = new ashuwp_termmeta_feild($ashu_feild, $taxonomy_cof);
@@ -292,10 +292,11 @@ $ashuwp_termmeta_feild = new ashuwp_termmeta_feild($ashu_feild, $taxonomy_cof);
 **/
 /**General options**/
 $page_info = array(
-  'full_name' => 'General Options',
-  'optionname'=>'general',
-  'child'=>false,
-  'filename' => 'generalpage'
+  'full_name'  => 'General Options',
+  'optionname' => 'general',
+  'child'      => false,
+  'desc'       => '<a href="http://www.ashuwp.com/framework/down">Ashuwp Framework 5.8</a>',
+  'filename'   => 'generalpage'
 );
 
 $ashu_options = array();
@@ -515,11 +516,12 @@ $option_page = new ashuwp_options_feild($ashu_options, $page_info);
 
 /**Child options page width tab style**/
 $child_info = array(
-  'full_name' => 'Child Options',
-  'optionname'=>'childoption',
+  'full_name'   => 'Child Options',
+  'optionname'  => 'childoption',
   'child'=>true,
-  'parent_slug'=>'generalpage',
-  'filename' => 'childpage'
+  'desc'        => '<a href="http://www.ashuwp.com/framework/down">Ashuwp Framework 5.8</a>',
+  'parent_slug' => 'generalpage',
+  'filename'    => 'childpage'
 );
 
 $child_option = array();
@@ -579,10 +581,11 @@ $child_page = new ashuwp_options_feild($child_option, $child_info);
 
 /**Other top page**/
 $top_page_info = array(
-  'full_name' => 'Top page',
-  'optionname'=>'toppage',
+  'full_name'  => 'Top page',
+  'optionname' =>'toppage',
   'child'=>false,
-  'filename' => 'toppage_slug',
+  'desc'       => '<a href="http://www.ashuwp.com/framework/down">Ashuwp Framework 5.8</a>',
+  'filename'   => 'toppage_slug',
   'tab'=>true
 );
 
