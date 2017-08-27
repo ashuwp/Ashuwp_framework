@@ -3,12 +3,12 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.7
+* Version: 5.7.1
 **/
 
 class ashuwp_framework_core {
   
-  public $file_png=array(
+  public $file_ico=array(
     'archive' => 'images/media/archive.png',
     'audio' => 'images/media/audio.png',
     'code' =>  'images/media/code.png',
@@ -28,13 +28,12 @@ class ashuwp_framework_core {
     wp_enqueue_script( 'wp-color-picker' );
     wp_enqueue_script( 'jquery-ui-tabs' );
     wp_enqueue_script('ashuwp_framework_js', get_template_directory_uri(). '/ashuwp_framework/js/ashuwp_framework.js','','',true);
-    wp_localize_script( 'ashuwp_framework_js', 'ashu_file_preview', array('img_base'=>includes_url(),'img_path'=>$this->file_png,'ajaxurl' => admin_url( 'admin-ajax.php' )));
+    wp_localize_script( 'ashuwp_framework_js', 'ashu_file_preview', array('img_base'=>includes_url(),'img_path'=>$this->file_ico,'ajaxurl' => admin_url( 'admin-ajax.php' )));
   }
   
   public function enqueue_html(){
     $html_output = '';
     foreach( $this->enqueue_html as $id => $tem_html ){
-      
       $html_output .= '<script type="text/html" id="'.$id.'">';
       $html_output .= $tem_html;
       $html_output .= '</script>';
@@ -45,26 +44,27 @@ class ashuwp_framework_core {
   
   public function get_file_ico($src){
     $file_type = substr($src, strrpos($src , '.') + 1);
+    $file_ico = includes_url();
     if( in_array($file_type,array('png','jpg','gif','bmp','svg')) ){
       $file_ico = $src;
     }elseif( in_array($file_type,array('zip','rar','7z','gz','tar','bz','bz2')) ){
-      $file_ico = includes_url().$this->file_png['archive'];
+      $file_ico .= $this->file_ico['archive'];
     }elseif( in_array($file_type,array('mp3','wma','wav','mod','ogg','au')) ){
-      $file_ico = includes_url().$this->file_png['audio'];
+      $file_ico .= $this->file_ico['audio'];
     }elseif( in_array($file_type,array('avi','mov','wmv','mp4','flv','mkv')) ){
-      $file_ico = includes_url().$this->file_png['video'];
+      $file_ico .= $this->file_ico['video'];
     }elseif( in_array($file_type,array('swf')) ){
-      $file_ico = includes_url().$this->file_png['interactive'];
+      $file_ico .= $this->file_ico['interactive'];
     }elseif( in_array($file_type,array('php','js','css','json','html','xml')) ){
-      $file_ico = includes_url().$this->file_png['code'];
+      $file_ico .= $this->file_ico['code'];
     }elseif( in_array($file_type,array('doc','docx','pdf','wps')) ){
-      $file_ico = includes_url().$this->file_png['_document'];
+      $file_ico .= $this->file_ico['_document'];
     }elseif( in_array($file_type,array('xls','xlsx','csv','et','ett')) ){
-      $file_ico = includes_url().$this->file_png['spreadsheet'];
+      $file_ico .= $this->file_ico['spreadsheet'];
     }elseif( in_array($file_type,array('txt','rtf')) ){
-      $file_ico = includes_url().$this->file_png['_text'];
+      $file_ico .= $this->file_ico['_text'];
     }else{
-      $file_ico = includes_url().$this->file_png['_default'];
+      $file_ico .= $this->file_ico['_default'];
     }
     return $file_ico;
   }
@@ -101,7 +101,7 @@ class ashuwp_framework_core {
         $terms[$term->term_id] = $term->name;
         $args['parent'] = $term->term_id;
 
-        $child_terms = $this->ashuwp_get_terms_by_level( $args );
+        $child_terms = $this->ashuwp_get_terms_by_level( $args, $space );
         foreach($child_terms as $key=>$title){
           $terms[$key] = $space . $title;
         }
@@ -128,7 +128,12 @@ class ashuwp_framework_core {
     $entries = array();
     
     if( in_array($values['subtype'], $post_types) ) {
-      $entries = $this->ashuwp_get_posts_by_level(array('post_type'=>$values['subtype'],'post_parent'=>0),'');
+      if($values['type']=='select'){
+        $space = '&nbsp;&nbsp;&nbsp;';
+      }else{
+        $space = '';
+      }
+      $entries = $this->ashuwp_get_posts_by_level( array('post_type'=>$values['subtype'],'post_parent'=>0), $space );
     }elseif($values['subtype'] == 'sidebar'){
       global $wp_registered_sidebars;
       $sidebars = $wp_registered_sidebars;
@@ -141,7 +146,12 @@ class ashuwp_framework_core {
         'hide_empty' => false,
         'parent' => 0
       );
-      $entries = $this->ashuwp_get_terms_by_level($t_args,'');
+      if($values['type']=='select'){
+        $space = '&nbsp;&nbsp;&nbsp;';
+      }else{
+        $space = '';
+      }
+      $entries = $this->ashuwp_get_terms_by_level( $t_args, $space );
     }elseif($values['subtype'] == 'user'){
       $all_users = get_users();
       foreach($all_users as $user){
@@ -264,13 +274,13 @@ class ashuwp_framework_core {
       $values['desc'] = '';
     }
     
+    $format = '<input type="text" id="%s" name="%s" value="%s" class="ashuwp_field_input" />%s';
+    
     if( !empty($values['multiple']) && $values['multiple'] == true ){
-      $format = '<div class="multiple_item clearfix"><input type="text" id="%s" name="%s" value="%s" class="ashuwp_field_input" />%s<a href="#" class="delete_item">Delete</a></div>';
+      $format = '<div class="multiple_item clearfix">'.$format.'<a href="#" class="delete_item">Delete</a></div>';
       
       $this->enqueue_html['ashuwp_framework_html_'.$values['id']] = sprintf( $format, $values['id'].'_{{i}}', $values['id'].'[{{i}}]', '', $values['desc'] );
       
-    }else{
-      $format = '<input type="text" id="%s" name="%s" value="%s" class="ashuwp_field_input" />%s';
     }
 
     $this->before_tags($values);
@@ -532,17 +542,16 @@ class ashuwp_framework_core {
       $values['desc'] = '';
     }
     
+    $format = '%s<textarea id="%s" name="%s" class="ashuwp_field_textarea" >%s</textarea>';
+    
     if( !empty($values['multiple']) && $values['multiple'] == true ){
-      $format = '<div class="multiple_item clearfix">%s<textarea id="%s" name="%s" class="ashuwp_field_textarea" >%s</textarea><a href="#" class="delete_item">Delete</a></div>';
+      $format = '<div class="multiple_item clearfix">'.$format.'<a href="#" class="delete_item">Delete</a></div>';
       
       $this->enqueue_html['ashuwp_framework_html_'.$values['id']] = sprintf( $format, $values['desc'], $values['id'].'_{{i}}', $values['id'].'[{{i}}]', '' );
       
-    }else{
-      $format = '%s<textarea id="%s" name="%s" class="ashuwp_field_textarea" >%s</textarea>';
     }
 
     $this->before_tags($values);
-    
     
     if( !empty($values['multiple']) && $values['multiple'] == true ){
       if( empty( $values['std'] ) || !is_array( $values['std'] ) ){
