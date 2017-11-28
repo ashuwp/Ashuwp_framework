@@ -1,12 +1,13 @@
 /**
 *Author: Ashuwp
 *Author url: http://www.ashuwp.com
-*Version: 5.0
+*Version: 6.0
 **/
 jQuery(document).ready(function($){
   var upload_frame,
       gallery_frame;
   
+  //upload
   $('.ashuwp_field_area').on( 'click', 'a.ashu_upload_button', function( event ){
     
     event.preventDefault();
@@ -78,6 +79,7 @@ jQuery(document).ready(function($){
     }
   });
   
+  //gallery
   $('.ashuwp_field_area').on('click', 'a.add_gallery', function(event){
     event.preventDefault();
     
@@ -116,7 +118,6 @@ jQuery(document).ready(function($){
     gallery_frame.open();
     
   });
-  
   $('.ashuwp_field_area').on('click', 'a.delete', function(event){
     
     gallery_container = $(this).closest('.gallery_container');
@@ -161,6 +162,7 @@ jQuery(document).ready(function($){
   }
   ashuwp_gallery_sortable();
   
+  //field multiple
   $('.ashuwp_field_area .multiple_wrap').on('click','a.add_item',function(){
     event.preventDefault();
     
@@ -186,6 +188,7 @@ jQuery(document).ready(function($){
     multiple_wrap.trigger('multiple_change');
   });
   
+  //colorpicker
   $('.ashuwp_color_picker input').wpColorPicker();
   $('.ashuwp_color_picker').on('multiple_change',function(){
     $('.ashuwp_color_picker input.ashuwp_field_input').each(function(){
@@ -195,6 +198,110 @@ jQuery(document).ready(function($){
     });
   });
   
-  
+  //tab
   $( '.ashuwp_feild_tabs' ).tabs();
+  
+  //quick edit
+  var ashuwp_inline_edit = inlineEditPost.edit;
+  inlineEditPost.edit = function( id ) {
+
+		// "call" the original WP edit function
+		// we don't want to leave WordPress hanging
+		ashuwp_inline_edit.apply( this, arguments );
+
+		// now we take care of our business
+
+		// get the post ID
+		var $post_id = 0;
+		if ( typeof( id ) == 'object' ) {
+			$post_id = parseInt( this.getId( id ) );
+		}
+
+		if ( $post_id > 0 ) {
+			// define the edit row
+			var $edit_row = $( '#edit-' + $post_id );
+			var $post_row = $( '#post-' + $post_id );
+
+			// get the data
+			//var $book_author = $( '.column-book_author', $post_row ).text();
+			//var $inprint = !! $('.column-inprint>*', $post_row ).prop('checked');
+
+			// populate the data
+			//$( ':input[name="book_author"]', $edit_row ).val( $book_author );
+			//$( ':input[name="inprint"]', $edit_row ).prop('checked', $inprint );
+      
+      //text
+      $( '.ashuwp_text_field .ashuwp_field_input', $edit_row ).each(function(){
+        input_name = $(this).prop('name');
+        col_name = '.column-'+input_name;
+        input_val = $( col_name, $post_row ).text();
+        $(this).val(input_val);
+      });
+      //numbers_array
+      $( '.ashuwp_numbers_array_field .ashuwp_field_input', $edit_row ).each(function(){
+        input_name = $(this).prop('name');
+        col_name = '.column-'+input_name;
+        input_val = $( col_name, $post_row ).text();
+        $(this).val(input_val);
+      });
+      //color
+      $( '.ashuwp_color_field .ashuwp_field_input', $edit_row ).each(function(){
+        input_name = $(this).prop('name');
+        col_name = '.column-'+input_name;
+        color_data = $( col_name, $post_row ).find('span').attr('data-color');
+        
+        $(this).val(color_data);
+        $(this).wpColorPicker();
+      });
+      //textarea
+      $( '.ashuwp_textarea_field .ashuwp_field_textarea', $edit_row ).each(function(){
+        input_name = $(this).prop('name');
+        col_name = '.column-'+input_name;
+        input_val = $( col_name, $post_row ).text();
+        $(this).val(input_val);
+      });
+      //radio
+      $( '.ashuwp_radio_field', $edit_row ).each(function(){
+        input_name = $(this).find('.ashuwp_field_radio').eq(0).prop('name');
+        col_name = '.column-'+input_name;
+        input_val = $( col_name, $post_row ).text();
+        $(this).find('.ashuwp_field_radio').each(function(){
+          check_text = $(this).attr('data-text');
+          if(input_val==check_text){
+            $(this).prop('checked', true );
+          }
+        });
+      });
+      //checkbox
+      $( '.ashuwp_checkbox_field', $edit_row ).each(function(){
+        input_name = $(this).find('.ashuwp_field_checkbox').eq(0).prop('name');
+        input_name = input_name.substr(0, input_name.length-2);
+        console.log(input_name);
+        col_name = '.column-'+input_name;
+        input_val = $( col_name, $post_row ).text();
+        check_values = input_val.split(',');
+        
+        $(this).find('.ashuwp_field_checkbox').each(function(){
+          check_text = $(this).attr('data-text');
+          
+          if( $.inArray( check_text,check_values )!=-1){
+            $(this).prop('checked', true );
+          }
+        });
+      });
+      
+      //select
+      $( '.ashuwp_select_field', $edit_row ).each(function(){
+        input_name = $(this).find('.ashuwp_field_select').prop('name');
+        col_name = '.column-'+input_name;
+        input_val = $( col_name, $post_row ).text();
+        $(this).find('option').each(function(){
+          check_text = $(this).text();
+          if(input_val==check_text){
+            $(this).prop('selected', true );
+          }
+        });
+      });
+		}
+	};
 });

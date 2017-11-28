@@ -1,7 +1,7 @@
 /*！
 *Author: Ashuwp
 *Author url: http://www.ashuwp.com
-*Version: 5.1
+*Version: 6.0
 */
 
 *,
@@ -304,4 +304,19 @@ ul.nav-tabs li.ui-tabs-active a:hover {
   .ashuwp_field .gallery_view .image {
     width:50%;
   }
+}
+.inline-edit-row .ashuwp_field{
+  margin-top:10px;
+  padding: 0 .5em;
+  width:40.1%;
+}
+.inline-edit-row .ashuwp_field .ashuwp_field_label{
+  font-style: italic;
+  width: 6em;
+  font-weight: normal;
+  font-size: 12px;
+}
+.inline-edit-row .ashuwp_field .ashuwp_field_area {
+  padding-left:6em;
+  font-size:12px;
 }

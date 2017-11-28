@@ -2,7 +2,7 @@
 /**
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.8
+* Version: 6.0
 **/
 
 /**

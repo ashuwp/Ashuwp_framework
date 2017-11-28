@@ -2,7 +2,7 @@
 /**
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.8
+* Version: 6.0
 **/
 
 class ashuwp_postmeta_feild extends ashuwp_framework_core {
@@ -12,7 +12,9 @@ class ashuwp_postmeta_feild extends ashuwp_framework_core {
   function __construct($ashu_meta, $meta_conf) {
     $this->ashu_meta = $ashu_meta;
     $this->meta_conf = $meta_conf;
-	
+    
+    $this->ashuwp_set_quick_edit();
+    
     add_action('admin_menu', array(&$this, 'init_boxes'));
     add_action('save_post', array(&$this, 'save_postdata'));
     add_action( 'admin_enqueue_scripts', array(&$this, 'enqueue_css_js') );
@@ -133,6 +135,20 @@ class ashuwp_postmeta_feild extends ashuwp_framework_core {
           
         }
       }
+    }
+  }
+  
+  public function ashuwp_set_quick_edit(){
+    $quick_metas = array();
+    foreach($this->ashu_meta as $meta){
+      if( !empty($meta['quick_edit']) && $meta['quick_edit'] == true ){
+        $quick_metas[] = $meta;
+      }
+    }
+    
+    if( !empty($quick_metas) ){
+      $quick_edit_conf = $this->meta_conf;
+      new ashuwp_postmeta_quick_edit($quick_metas, $quick_edit_conf);
     }
   }
 }

@@ -3,7 +3,7 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 5.8
+* Version: 6.0
 **/
 
 class ashuwp_framework_core {
@@ -372,7 +372,7 @@ class ashuwp_framework_core {
     
     $entries = $this->select_entries($values);
     
-    $format = '<label for="%s"><input type="radio" id="%s" name="%s" value="%s" class="ashuwp_field_radio" %s />%s</label>';
+    $format = '<label for="%s"><input type="radio" id="%s" name="%s" value="%s" class="ashuwp_field_radio" %s data-text="%s" />%s</label>';
     
     if( !empty($values['multiple']) && $values['multiple'] == true ){
       
@@ -383,7 +383,7 @@ class ashuwp_framework_core {
           $checked = 'checked = "checked"';
         }
           
-        $html_format .= sprintf( $format, $values['id'].'_'.$id.'_{{i}}', $values['id'].'_'.$id.'_{{i}}', $values['id'].'[{{i}}]', $id, $checked, $title );
+        $html_format .= sprintf( $format, $values['id'].'_'.$id.'_{{i}}', $values['id'].'_'.$id.'_{{i}}', $values['id'].'[{{i}}]', $id, $checked, $title, $title );
       }
       $html_format .= $values['desc'].'<a href="#" class="delete_item">Delete</a></div>';
       
@@ -413,7 +413,7 @@ class ashuwp_framework_core {
               $checked = 'checked = "checked"';
             }
             
-            echo sprintf( $format, $values['id'].'_'.$id.'_'.$i, $values['id'].'_'.$id.'_'.$i, $values['id'].'['.$i.']', $id, $checked, $title );
+            echo sprintf( $format, $values['id'].'_'.$id.'_'.$i, $values['id'].'_'.$id.'_'.$i, $values['id'].'['.$i.']', $id, $checked, $title, $title );
             
             echo '<a href="#" class="delete_item">Delete</a>';
             
@@ -432,7 +432,7 @@ class ashuwp_framework_core {
             $checked = 'checked = "checked"';
           }
           
-          echo sprintf( $format, $values['id'].'_'.$id, $values['id'].'_'.$id, $values['id'], $id, $checked, $title );
+          echo sprintf( $format, $values['id'].'_'.$id, $values['id'].'_'.$id, $values['id'], $id, $checked, $title, $title );
         }
         
         echo $values['desc'];
@@ -459,7 +459,7 @@ class ashuwp_framework_core {
     
     $entries = $this->select_entries($values);
     
-    $format = '<label for="%s"><input type="checkbox" id="%s" name="%s" value="%s" class="ashuwp_field_checkbox" %s />%s</label>';
+    $format = '<label for="%s"><input type="checkbox" id="%s" name="%s" value="%s" class="ashuwp_field_checkbox" %s data-text="%s" />%s</label>';
     
     if( !empty($values['multiple']) && $values['multiple'] == true ){
       
@@ -470,7 +470,7 @@ class ashuwp_framework_core {
           $checked = 'checked = "checked"';
         }
           
-        $html_format .= sprintf( $format, $values['id'].'_'.$id.'_{{i}}', $values['id'].'_'.$id.'_{{i}}', $values['id'].'[{{i}}][]', $id, $checked, $title );
+        $html_format .= sprintf( $format, $values['id'].'_'.$id.'_{{i}}', $values['id'].'_'.$id.'_{{i}}', $values['id'].'[{{i}}][]', $id, $checked, $title, $title );
       }
       $html_format .= $values['desc'].'<a href="#" class="delete_item">Delete</a></div>';
       
@@ -499,7 +499,7 @@ class ashuwp_framework_core {
                 $checked = 'checked = "checked"';
               }
               
-              echo sprintf( $format, $values['id'].'_'.$id.'_'.$i, $values['id'].'_'.$id.'_'.$i, $values['id'].'['.$i.']'.'[]', $id, $checked, $title );
+              echo sprintf( $format, $values['id'].'_'.$id.'_'.$i, $values['id'].'_'.$id.'_'.$i, $values['id'].'['.$i.']'.'[]', $id, $checked, $title, $title );
               
               echo '<a href="#" class="delete_item">Delete</a>';
               
@@ -518,7 +518,7 @@ class ashuwp_framework_core {
             $checked = 'checked = "checked"';
           }
           
-          echo sprintf( $format, $values['id'].'_'.$id, $values['id'].'_'.$id, $values['id'].'[]', $id, $checked, $title );
+          echo sprintf( $format, $values['id'].'_'.$id, $values['id'].'_'.$id, $values['id'].'[]', $id, $checked, $title, $title );
         }
         
         echo $values['desc'];
@@ -1141,4 +1141,5 @@ class ashuwp_framework_core {
 require __DIR__ .'/ashuwp_options_feild.php';
 require __DIR__ .'/ashuwp_postmeta_feild.php';
 require __DIR__ .'/ashuwp_termmeta_feild.php';
+require __DIR__ .'/ashuwp_quick_edit.php';
 //require __DIR__ .'/import_export.php';
