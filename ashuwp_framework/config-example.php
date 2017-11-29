@@ -26,11 +26,12 @@ $ashu_meta[] = array(
   'id'   => 'text_example',
   'desc' => 'A text input example, Default content:"Hello ashuwp."',
   'std'  => 'Hello ashuwp.',
-  'type' => 'text'
+  'type' => 'text',
+  'quick_edit'=>true //quick_edit
 );
 
 $ashu_meta[] = array(
-  'name' => 'Texearea Example',
+  'name' => 'Textarea Example',
   'id'   => 'textarea_example',
   'desc' => 'A textarea example, Default content:"Default content."',
   'std'  => 'Default content.',
