@@ -3,9 +3,9 @@
 
 Ashuwp_framework是由阿树工作室发布的一个wordpress后台框架。
 
-最新版本 6.0
-更新日期 2017.11.28
-系统要求 php5.3以上 wordpress4.5以上
+*最新版本 6.0
+*更新日期 2017.11.28
+*系统要求 php5.3以上 wordpress4.5以上
 
 使用本框架的要求：你需要具备基础的php语法知识，以及对wordpress主题有基本的了解。
 
@@ -146,3 +146,7 @@ $general_option = get_option( 'ashuwp_general' );
 var_dump( $general_option );
 
 ```
+
+## 捐助我
+*如果您觉得Ashuwp Framework对您wordpress开发有帮助，你还可以扫码捐助支持我。
+![image](http://www.ashuwp.com/imguploads/2017/11/a6x00876ajgbflygny9r775.png)
