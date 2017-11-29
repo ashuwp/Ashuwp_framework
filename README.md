@@ -148,5 +148,7 @@ var_dump( $general_option );
 ```
 
 ## 捐助我
-*如果您觉得Ashuwp Framework对您wordpress开发有帮助，你还可以扫码捐助支持我。
+
+* 如果您觉得Ashuwp Framework对您wordpress开发有帮助，你还可以扫码捐助支持我。
+
 ![image](http://www.ashuwp.com/imguploads/2017/11/a6x00876ajgbflygny9r775.png)
