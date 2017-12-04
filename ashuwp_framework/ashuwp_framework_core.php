@@ -3,7 +3,7 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 6.0
+* Version: 6.1
 **/
 
 class ashuwp_framework_core {
@@ -276,7 +276,7 @@ class ashuwp_framework_core {
     
     $format = '<input type="text" id="%s" name="%s" value="%s" class="ashuwp_field_input" />%s';
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       $format = '<div class="multiple_item clearfix">'.$format.'<a href="#" class="delete_item">Delete</a></div>';
       
       $this->enqueue_html['ashuwp_framework_html_'.$values['id']] = sprintf( $format, $values['id'].'_{{i}}', $values['id'].'[{{i}}]', '', $values['desc'] );
@@ -286,7 +286,7 @@ class ashuwp_framework_core {
     $this->before_tags($values);
     
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       if( empty( $values['std'] ) || !is_array( $values['std'] ) ){
         $values['std'] = array();
       }
@@ -310,7 +310,7 @@ class ashuwp_framework_core {
     if( empty($values['id']) )
       return;
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       if( !empty($values['std']) && is_array($values['std']) ){
         foreach( $values['std'] as $key => $value ){
           $value_tem = '';
@@ -374,7 +374,7 @@ class ashuwp_framework_core {
     
     $format = '<label for="%s"><input type="radio" id="%s" name="%s" value="%s" class="ashuwp_field_radio" %s data-text="%s" />%s</label>';
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       
       $html_format = '<div class="multiple_item clearfix">';
       foreach(  $entries as $id => $title ) {
@@ -393,7 +393,7 @@ class ashuwp_framework_core {
     
     $this->before_tags($values);
     
-      if( !empty($values['multiple']) && $values['multiple'] == true ){
+      if( !empty($values['multiple']) && $values['multiple'] === true ){
         
         if( empty( $values['std'] ) || !is_array( $values['std'] ) ){
           $values['std'] = array();
@@ -461,7 +461,7 @@ class ashuwp_framework_core {
     
     $format = '<label for="%s"><input type="checkbox" id="%s" name="%s" value="%s" class="ashuwp_field_checkbox" %s data-text="%s" />%s</label>';
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       
       $html_format = '<div class="multiple_item clearfix">';
       foreach(  $entries as $id => $title ) {
@@ -479,7 +479,7 @@ class ashuwp_framework_core {
     }
     
     $this->before_tags($values);
-      if( !empty($values['multiple']) && $values['multiple'] == true ){
+      if( !empty($values['multiple']) && $values['multiple'] === true ){
         
         if( empty( $values['std'] ) || !is_array( $values['std'] ) ){
           $values['std'] = array();
@@ -544,7 +544,7 @@ class ashuwp_framework_core {
     
     $format = '%s<textarea id="%s" name="%s" class="ashuwp_field_textarea" >%s</textarea>';
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       $format = '<div class="multiple_item clearfix">'.$format.'<a href="#" class="delete_item">Delete</a></div>';
       
       $this->enqueue_html['ashuwp_framework_html_'.$values['id']] = sprintf( $format, $values['desc'], $values['id'].'_{{i}}', $values['id'].'[{{i}}]', '' );
@@ -553,7 +553,7 @@ class ashuwp_framework_core {
 
     $this->before_tags($values);
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       if( empty( $values['std'] ) || !is_array( $values['std'] ) ){
         $values['std'] = array();
       }
@@ -587,7 +587,7 @@ class ashuwp_framework_core {
 
     $format = '<option value="%s" %s >%s</option>';
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
 
       $html_format = '<div class="multiple_item clearfix">';
       
@@ -611,7 +611,7 @@ class ashuwp_framework_core {
     }
     
     $this->before_tags($values);
-      if( !empty($values['multiple']) && $values['multiple'] == true ){
+      if( !empty($values['multiple']) && $values['multiple'] === true ){
         
         if( empty( $values['std'] ) || !is_array( $values['std'] ) ){
           $values['std'] = array();
@@ -690,7 +690,7 @@ class ashuwp_framework_core {
       $file_view = '<img src="'.$this->get_file_ico($values['std']).'" />';
     }
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       $format = '<div class="multiple_item clearfix"><div id="%s" class="ashuwp_file_preview">%s</div><div class="ashuwp_upload_input"><input type="text" id="%s" name="%s" value="%s" class="ashuwp_field_upload" /><a id="%s" class="ashu_upload_button button" href="#">%s</a></div>%s<a href="#" class="delete_item">Delete</a></div>';
       
       $this->enqueue_html['ashuwp_framework_html_'.$values['id']] = sprintf( $format, $values['id'].'_preview_{{i}}','', $values['id'].'_upload_{{i}}', $values['id'].'[{{i}}]', '', $values['id'].'_{{i}}',  $button_text, $values['desc'] );
@@ -700,7 +700,7 @@ class ashuwp_framework_core {
     }
     
     $this->before_tags($values);
-      if( !empty($values['multiple']) && $values['multiple'] == true ){
+      if( !empty($values['multiple']) && $values['multiple'] === true ){
         if( empty( $values['std'] ) || !is_array( $values['std'] ) ){
           $values['std'] = array();
         }
@@ -729,7 +729,7 @@ class ashuwp_framework_core {
     if( empty($values['id']) )
       return;
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       if( !empty($values['std']) && is_array($values['std']) ){
         foreach( $values['std'] as $key => $value ){
           if( !empty($value) && is_array($value) ){
@@ -752,7 +752,7 @@ class ashuwp_framework_core {
 
     $button_text = (empty($values['button_text'])) ? 'Upload' : $values['button_text'];
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       $format = '<div class="multiple_item multiple_gallery_item clearfix">%s<div class="gallery_container"><div class="gallery_view clearfix">%s</div><input type="hidden" id="%s" name="%s" value="%s" class="ashuwp_gallery_input" /><a href="#" class="add_gallery button">%s</a></div><a href="#" class="delete_item">Delete</a></div>';
       
       $this->enqueue_html['ashuwp_framework_html_'.$values['id']] = sprintf( $format, $values['desc'], '', $values['id'].'_input_{{i}}', $values['id'].'[{{i}}]', '', $button_text );
@@ -760,7 +760,7 @@ class ashuwp_framework_core {
     }
     
     $this->before_tags($values);
-      if( !empty($values['multiple']) && $values['multiple'] == true ){
+      if( !empty($values['multiple']) && $values['multiple'] === true ){
         
         if( empty( $values['std'] ) || !is_array( $values['std'] ) ){
           //$values['std'] = explode( ',', $values['std'] );
@@ -899,7 +899,7 @@ class ashuwp_framework_core {
       }
     }
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       
       $html_format = '<div class="multiple_item multiple_group_item '.$has_gallery.' clearfix">';
       
@@ -1022,7 +1022,7 @@ class ashuwp_framework_core {
     
     $this->before_tags($values);
     
-    if( !empty($values['multiple']) && $values['multiple'] == true ){
+    if( !empty($values['multiple']) && $values['multiple'] === true ){
       
       $i=0;
       echo '<div class="multiple_wrap clearfix">';

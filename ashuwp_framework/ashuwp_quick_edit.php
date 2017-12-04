@@ -2,7 +2,7 @@
 /**
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 6.0
+* Version: 6.1
 **/
 
 class ashuwp_postmeta_quick_edit extends ashuwp_framework_core {

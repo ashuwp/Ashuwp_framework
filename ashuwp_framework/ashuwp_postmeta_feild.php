@@ -2,7 +2,7 @@
 /**
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 6.0
+* Version: 6.1
 **/
 
 class ashuwp_postmeta_feild extends ashuwp_framework_core {
@@ -107,7 +107,7 @@ class ashuwp_postmeta_feild extends ashuwp_framework_core {
           
           if( $ashu_meta['type'] == 'tinymce' ){
             $data =  stripslashes( $_POST[$ashu_meta['id']] );
-          }elseif( ( !empty($ashu_meta['multiple']) && $ashu_meta['multiple']==true ) || $ashu_meta['type'] == 'group' ){
+          }elseif( ( !empty($ashu_meta['multiple']) && $ashu_meta['multiple']===true ) || $ashu_meta['type'] == 'group' ){
             if($_POST[$ashu_meta['id']]!=''){
               $data = array_filter($_POST[$ashu_meta['id']]);
             }else{
@@ -141,7 +141,7 @@ class ashuwp_postmeta_feild extends ashuwp_framework_core {
   public function ashuwp_set_quick_edit(){
     $quick_metas = array();
     foreach($this->ashu_meta as $meta){
-      if( !empty($meta['quick_edit']) && $meta['quick_edit'] == true ){
+      if( !empty($meta['quick_edit']) && $meta['quick_edit'] === true ){
         $quick_metas[] = $meta;
       }
     }
