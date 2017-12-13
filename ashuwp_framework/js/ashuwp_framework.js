@@ -1,7 +1,7 @@
 /**
 *Author: Ashuwp
 *Author url: http://www.ashuwp.com
-*Version: 6.0
+*Version: 6.2
 **/
 jQuery(document).ready(function($){
   var upload_frame,
@@ -202,6 +202,7 @@ jQuery(document).ready(function($){
   $( '.ashuwp_feild_tabs' ).tabs();
   
   //quick edit
+  if(typeof(inlineEditPost)!='undefined'){
   var ashuwp_inline_edit = inlineEditPost.edit;
   inlineEditPost.edit = function( id ) {
 
@@ -304,4 +305,5 @@ jQuery(document).ready(function($){
       });
 		}
 	};
+  }
 });
