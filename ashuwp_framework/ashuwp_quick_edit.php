@@ -2,7 +2,7 @@
 /**
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 6.1
+* Version: 6.4
 **/
 
 class ashuwp_postmeta_quick_edit extends ashuwp_framework_core {
@@ -41,13 +41,13 @@ class ashuwp_postmeta_quick_edit extends ashuwp_framework_core {
   }
   //Add a custom column
   public function ashuwp_post_type_columns( $columns ){
-    
+    unset($columns['date']);
     foreach($this->ashu_meta as $ashu_meta){
       if( !empty($ashu_meta['id']) ){
         $columns[$ashu_meta['id']] = $ashu_meta['name'];
       }
     }
-    
+    $columns['date']=__('Date');
     return $columns;
   }
   

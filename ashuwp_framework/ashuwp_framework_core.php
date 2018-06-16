@@ -3,7 +3,7 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 6.1
+* Version: 6.4
 **/
 
 class ashuwp_framework_core {
@@ -95,7 +95,7 @@ class ashuwp_framework_core {
     $terms = array();
     $top_terms = get_terms($args);
     
-    if(!empty($top_terms)){
+    if ( $top_terms && ! is_wp_error( $top_terms ) ){
       foreach($top_terms as $term){
         
         $terms[$term->term_id] = $term->name;
