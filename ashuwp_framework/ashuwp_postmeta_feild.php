@@ -2,7 +2,7 @@
 /**
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 6.1
+* Version: 6.2
 **/
 
 class ashuwp_postmeta_feild extends ashuwp_framework_core {
@@ -16,6 +16,7 @@ class ashuwp_postmeta_feild extends ashuwp_framework_core {
     $this->ashuwp_set_quick_edit();
     
     add_action('admin_menu', array(&$this, 'init_boxes'));
+    add_action('post_updated', array(&$this, 'save_postdata'), 9 );
     add_action('save_post', array(&$this, 'save_postdata'));
     add_action( 'admin_enqueue_scripts', array(&$this, 'enqueue_css_js') );
     add_action( 'admin_footer', array(&$this, 'enqueue_html') );
@@ -85,12 +86,12 @@ class ashuwp_postmeta_feild extends ashuwp_framework_core {
     echo '</div>';
   }
   
-  public function save_postdata() {
-    if( isset( $_POST['post_type'] ) && in_array($_POST['post_type'],$this->meta_conf['page'] ) && (isset($_POST['save']) || isset($_POST['publish']) ) ){
-	  
-      $post_id = $_POST['post_ID'];
-      if(!$post_id)
-        return;
+  public function save_postdata( $post_id ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+      return;
+    }
+
+    if( isset( $_POST['post_type'] ) && in_array($_POST['post_type'],$this->meta_conf['page'] ) ){
       
       if ( 'page' == $_POST['post_type'] ) {
         if ( !current_user_can( 'edit_page', $post_id  ) )
