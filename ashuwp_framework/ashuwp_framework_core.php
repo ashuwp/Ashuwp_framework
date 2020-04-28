@@ -3,7 +3,7 @@
 * Ashuwp_framework
 * Author: Ashuwp
 * Author url: http://www.ashuwp.com
-* Version: 6.4
+* Version: 6.6
 **/
 
 class ashuwp_framework_core {
@@ -45,7 +45,7 @@ class ashuwp_framework_core {
   public function get_file_ico($src){
     $file_type = substr($src, strrpos($src , '.') + 1);
     $file_ico = includes_url();
-    if( in_array($file_type,array('png','jpg','gif','bmp','svg')) ){
+    if( in_array($file_type,array('png','jpg','gif','bmp','svg','jpeg')) ){
       $file_ico = $src;
     }elseif( in_array($file_type,array('zip','rar','7z','gz','tar','bz','bz2')) ){
       $file_ico .= $this->file_ico['archive'];

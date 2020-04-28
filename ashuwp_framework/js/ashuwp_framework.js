@@ -50,7 +50,7 @@ jQuery(document).ready(function($){
           file_type = file_uri.substring(index1,index2),
           img_src = ashu_file_preview.img_base;
           
-      if($.inArray(file_type,['.png','.jpg','.gif','.bmp','.svg'])!='-1'){
+      if($.inArray(file_type,['.png','.jpg','.gif','.bmp','.svg','.jpeg'])!='-1'){
         img_src = file_uri;
       }else if($.inArray(file_type,['.zip','.rar','.7z','.gz','.tar','.bz','.bz2'])!='-1'){
         img_src += ashu_file_preview.img_path.archive;
